@@ -2,13 +2,6 @@
 
 Micro-serviço de gerenciamento de pedidos.
 
----
-<br>
-
-[[_toc_]]
-
-
----
 <br>
 
 ### Tecnologia
