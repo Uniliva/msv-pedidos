@@ -18,6 +18,15 @@ public class ProdutoFixture implements TemplateLoader {
 				add("valor", random(Double.class, range(1L, 500L)));
 			}
 
+		}).addTemplate("invalido", new Rule() {
+			{
+				add("id", random(Long.class, range(1L, 500L)));
+				add("descricao", null);
+				add("qtdEstoque", null);
+				add("unidade", random("Caixa", "Barra", "Metro", "Litro"));
+				add("valor", random(Double.class, range(1L, 500L)));
+			}
+
 		});
 	}
 }
