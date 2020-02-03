@@ -1,17 +1,24 @@
 package br.com.unicontas.pedidos.config;
 
-import java.time.LocalTime;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collections;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.context.request.async.DeferredResult;
+
+import com.fasterxml.classmate.TypeResolver;
 
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.builders.ResponseMessageBuilder;
+import springfox.documentation.schema.AlternateTypeRules;
 import springfox.documentation.schema.ModelRef;
+import springfox.documentation.schema.WildcardType;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.service.ResponseMessage;
@@ -22,10 +29,18 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
+	
+	@Autowired
+	private TypeResolver typeResolver;
+	  
 	@Bean
 	public Docket api() {
 		return new Docket(DocumentationType.SWAGGER_2)
-                .directModelSubstitute(LocalTime.class, String.class)
+				.directModelSubstitute(LocalDate.class, String.class)
+				.alternateTypeRules( AlternateTypeRules.newRule(
+						    typeResolver.resolve(DeferredResult.class,
+			                typeResolver.resolve(ResponseEntity.class, WildcardType.class)),
+			                typeResolver.resolve(WildcardType.class)))
 				.select()
 				.apis(RequestHandlerSelectors.basePackage("br.com.unicontas.pedidos"))
 				.paths(PathSelectors.regex("/v1.*"))
@@ -54,7 +69,7 @@ public class SwaggerConfig {
 	final ResponseMessage resInternalError= new ResponseMessageBuilder()
             .code(500)
             .message("Erro interno!")
-            .responseModel(new ModelRef("Error"))
+            .responseModel(new ModelRef("string"))
             .build();
 	
 	final ResponseMessage resCreated= new ResponseMessageBuilder()

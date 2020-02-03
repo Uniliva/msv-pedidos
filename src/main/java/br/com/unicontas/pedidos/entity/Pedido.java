@@ -3,7 +3,7 @@ package br.com.unicontas.pedidos.entity;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -54,7 +54,7 @@ public class Pedido implements Serializable {
                 joinColumns=@JoinColumn(name="COD_PEDIDO"),   
                 inverseJoinColumns=@JoinColumn(name="COD_PRODUTO")) 
 	@JsonProperty("produtos")
-	private List<Produto> listaProdutos = new ArrayList<>();
+	private Collection<Produto> listaProdutos = new ArrayList<>();
 
 	
 	public Double getQtdProdutos() {
