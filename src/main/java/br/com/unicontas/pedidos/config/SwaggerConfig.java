@@ -1,5 +1,6 @@
 package br.com.unicontas.pedidos.config;
 
+import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.Collections;
 
@@ -23,7 +24,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class SwaggerConfig {
 	@Bean
 	public Docket api() {
-		return new Docket(DocumentationType.SWAGGER_2).select()
+		return new Docket(DocumentationType.SWAGGER_2)
+                .directModelSubstitute(LocalTime.class, String.class)
+				.select()
 				.apis(RequestHandlerSelectors.basePackage("br.com.unicontas.pedidos"))
 				.paths(PathSelectors.regex("/v1.*"))
 				.build()
@@ -36,7 +39,7 @@ public class SwaggerConfig {
 	}
 
 	private ApiInfo info() {
-		return new ApiInfo("Msv - Produtos API", "Api de gerenciamento de produtos", "0.0.1", "Terms of service",
+		return new ApiInfo("Msv - Produtos API", "Api de gerenciamento de Pedidos e Produtos", "0.0.1", "Terms of service",
 				new Contact("Uniliva Alves", "www.example.com", "myeaddress@company.com"), "License of API",
 				"API license URL", Collections.emptyList());
 
