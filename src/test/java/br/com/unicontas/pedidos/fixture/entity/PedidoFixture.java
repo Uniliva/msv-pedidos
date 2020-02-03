@@ -1,6 +1,7 @@
 package br.com.unicontas.pedidos.fixture.entity;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import br.com.six2six.fixturefactory.Fixture;
 import br.com.six2six.fixturefactory.Rule;
@@ -23,9 +24,9 @@ public class PedidoFixture implements TemplateLoader {
 		}).addTemplate("invalido", new Rule() {
 			{
 				add("id", random(Long.class, range(1L, 500L)));
-				add("qtdProdutos", null);
-				add("dataPedido", LocalDate.now());
-				add("listaProdutos", has(3).of(Produto.class, "invalido"));
+				add("qtdProdutos", 0D);
+				add("dataPedido", null);
+				add("listaProdutos", new ArrayList<Produto>());
 			}
 
 		});

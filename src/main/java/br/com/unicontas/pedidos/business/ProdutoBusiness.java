@@ -28,7 +28,7 @@ public class ProdutoBusiness {
 	}
 
 	public Produto buscaPorCodigo(Long codigo) {
-		return service.buscaPorCodigo(codigo).orElseThrow(() -> new NotFoundException("Produto não encontrado"));
+		return service.buscaPorCodigo(codigo).orElseThrow(() -> new NotFoundException("Produto com o codigo "+codigo+" não encontrado"));
 	}
 
 	public Produto salvarProduto(Produto produto) {

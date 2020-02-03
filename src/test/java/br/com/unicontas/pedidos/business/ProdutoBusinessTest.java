@@ -111,7 +111,7 @@ public class ProdutoBusinessTest {
 	public void deveLancarExceptionAoBuscarProdutosQueNaoExiste() {
 
 		expectedException.expect(NotFoundException.class);
-		expectedException.expectMessage("Produto não encontrado");
+		expectedException.expectMessage("Produto com o codigo");
 
 		when(service.buscaPorCodigo(any(Long.class))).thenReturn(Optional.ofNullable(null));
 

@@ -44,6 +44,9 @@ public class PedidoBusinessTest {
 
 	@Mock
 	private PedidoService service;
+	
+	@Mock
+	private ProdutoBusiness produtoBusines;
 
 	@Rule
 	public ExpectedException expectedException = ExpectedException.none();
@@ -124,13 +127,27 @@ public class PedidoBusinessTest {
 	@Test
 	public void deveGravarPedidoAoSalvar() {
 		final Pedido pedidoFixture = Fixture.from(Pedido.class).gimme("valido");
+		final Produto produtoFixture = Fixture.from(Produto.class).gimme("valido");
 
+		when(produtoBusines.buscaPorCodigo(any(Long.class))).thenReturn(produtoFixture);
 		when(service.salvar(any(Pedido.class))).thenReturn(pedidoFixture);
 
 		Pedido resultado = business.salvar(pedidoFixture);
 
 		assertEquals(pedidoFixture, resultado);
 		verify(service, timeout(1)).salvar(any(Pedido.class));
+	}
+	
+	@Test
+	public void deveLancarExceptionPedidoAoSalvarPedidoComProdutoInvalido() {
+		final Pedido pedidoFixture = Fixture.from(Pedido.class).gimme("valido");
+		
+		expectedException.expect(NotFoundException.class);
+		expectedException.expectMessage("Produto com o codigo...");
+
+		when(produtoBusines.buscaPorCodigo(any(Long.class))).thenThrow( new NotFoundException("Produto com o codigo... "));
+		
+		business.salvar(pedidoFixture);
 	}
 
 	@Test

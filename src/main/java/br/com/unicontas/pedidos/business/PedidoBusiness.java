@@ -17,6 +17,9 @@ public class PedidoBusiness {
 
 	@Autowired
 	private PedidoService service;
+	
+	@Autowired
+	private ProdutoBusiness produtoService;
 
 	public List<Pedido> listar() {
 		return service.listar();
@@ -32,6 +35,7 @@ public class PedidoBusiness {
 	}
 
 	public Pedido salvar(Pedido pedido) {
+		pedido.getListaProdutos().stream().forEach(produto -> produtoService.buscaPorCodigo(pedido.getId()));
 		return service.salvar(pedido);		
 	}
 
