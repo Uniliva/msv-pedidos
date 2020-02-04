@@ -30,7 +30,7 @@ public class ConsultaCepService {
 
 			EnderecoDTO end = response.getBody();
 			
-			if(end.getErro()) {
+			if(end.getLocalidade() == null) {
 				throw new BusinessException("Cep invalido!!");	
 			}
 			

@@ -17,12 +17,16 @@ public class EnderecoDTOFixture implements TemplateLoader {
 				add("bairro", "Helena Maria");
 				add("localidade", "Osasco");
 				add("uf", "SP");
-				add("erro", false);
 			}
 
 		}).addTemplate("invalido", new Rule() {
 			{
-				add("erro", true);
+				add("cep", null);
+				add("logradouro", null);
+				add("complemento", null);
+				add("bairro",null);
+				add("localidade", null);
+				add("uf", null);
 			}
 
 		});

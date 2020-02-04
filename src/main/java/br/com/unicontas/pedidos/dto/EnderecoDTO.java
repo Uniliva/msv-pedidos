@@ -15,6 +15,5 @@ public class EnderecoDTO implements Serializable {
 	private String complemento;
 	private String bairro;
 	private String localidade;
-	private String uf;	
-	private Boolean erro;
+	private String uf;
 }
