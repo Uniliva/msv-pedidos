@@ -8,6 +8,7 @@ Micro-serviço de gerenciamento de pedidos.
 
 Foi desenvolvido usando:
 - Java 8
+- Rest
 - Spring Boot
 - Spring Data
 - Swagger
