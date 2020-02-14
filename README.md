@@ -1,13 +1,12 @@
 ## MSV-PEDIDOS
 
-Micro-serviço de gerenciamento de pedidos.
-
----
 
 [![Build Status](https://travis-ci.com/Uniliva/msv-pedidos.svg?branch=master)](https://travis-ci.com/Uniliva/msv-pedidos)
 [![codecov](https://codecov.io/gh/Uniliva/msv-pedidos/branch/master/graph/badge.svg)](https://codecov.io/gh/Uniliva/msv-pedidos)
 
-----
+
+Micro-serviço de gerenciamento de pedidos.
+
 <br>
 
 ### Tecnologia
