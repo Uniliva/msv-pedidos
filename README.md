@@ -5,7 +5,7 @@ Micro-serviço de gerenciamento de pedidos.
 ---
 
 [![Build Status](https://travis-ci.com/Uniliva/msv-pedidos.svg?branch=Cobertura)](https://travis-ci.com/Uniliva/msv-pedidos)
-![Codecov branch](https://img.shields.io/codecov/c/github/Uniliva/msv-pedidos/Cobertura?token=2c369d67-9b62-43ce-8562-78169bf970cf)
+[![codecov](https://codecov.io/gh/Uniliva/msv-pedidos/branch/master/graph/badge.svg)](https://codecov.io/gh/Uniliva/msv-pedidos)
 
 
 <br>
