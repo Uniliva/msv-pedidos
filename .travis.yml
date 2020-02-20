@@ -1,4 +1,30 @@
 language: java
+jdk:
+  - oraclejdk8
+
+before_install:
+  - sudo apt-get update
+  - cd msv-pedidos/
+  - echo "---------| Gerando pacote com maven!!!  |---------"
+  - mvn clean package
+
+script:
+  - docker build -t="msv-pedidos":latest .
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
+  - echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
+deploy:
+  provider: script
+  script:
+    echo "---------| Gerando Tags para imagem!!!  |---------";
+    docker tag msv-pedidos:latest $DOCKER_USERNAME/msv-pedidos:$TRAVIS_JOB_ID;
+    docker tag msv-pedidos:latest $DOCKER_USERNAME/msv-pedidos:latest;
+    echo "---------| Enviando para o Docker HUB !!!  |---------"
+    docker push $DOCKER_USERNAME/msv-pedidos:$TRAVIS_JOB_ID;
+    docker push $DOCKER_USERNAME/msv-pedidos:latest;
+    echo "---------| Imagem enviada com sucesso para Docker HUB !!!  |---------";
+  on:
+    brach: master
+notifications:
+  email: false
