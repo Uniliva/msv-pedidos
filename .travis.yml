@@ -1,16 +1,13 @@
 language: java
 
-before_install:
-  - sudo apt-get update
-  - echo "---------| Gerando pacote com maven!!!  |---------"
-  - mvn clean package
-
 script:
   - docker build -t="msv-pedidos":latest .
 
+before_deploy:
+  - echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
+
 after_success:
   - bash <(curl -s https://codecov.io/bash)
-  - echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
 deploy:
   provider: script
   script:
