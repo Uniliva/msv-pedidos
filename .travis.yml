@@ -2,6 +2,11 @@ language: java
 
 script:
   - docker build -t="msv-pedidos":latest .
+  
+before_install:
+  - sudo apt-get update
+  - echo "---------| Gerando pacote com maven!!!  |---------"
+  - mvn clean package
 
 before_deploy:
   - echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
